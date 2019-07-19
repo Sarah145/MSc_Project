@@ -4,7 +4,7 @@
 
 
 
-This directory contains the scripts used to process data for my masters research project which involved a cross-tissue comparison of scRNA-seq data from macrophages in 15 different tissues. The final manuscript can be found [here](https://github.com/Sarah145/MSc_Project/blob/master/manuscript.pdf) and the macrophage dataset can be explored through an interactive web app [here](https://tiny.cc/cross-tissue-macrophages).
+This directory contains the scripts used to process data for my masters research project which involved a cross-tissue comparison of scRNA-seq data from macrophages in 15 different tissues. The final manuscript can be found [here](https://github.com/Sarah145/MSc_Project/blob/master/final_manuscript.pdf) and the macrophage dataset can be explored through an interactive web app [here](https://tiny.cc/cross-tissue-macrophages).
 
 
 
