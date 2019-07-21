@@ -247,31 +247,27 @@ cyto_df <- subset(sig_tissue_degs, sig_tissue_degs$cluster %in% cyto_tissues)
 cyto_df <- subset(cyto_df, cyto_df$gene %in% cyto_genes)
 cyto_df$gene <- factor(cyto_df$gene, levels = rev(unique(cyto_df$gene)))
 
-colfunc <- colorRampPalette(c("#2D0059", "#4C0099", "#FF6A4D",  "#FF7221", "#FFFF99"))
+colfunc <- colorRampPalette(c("#FFFFFF", "#FFFFFF", "#FF82B4",  "#F25589", "#A63D67", "#850D69"))
 my_pal <- colfunc(100)
 
 cyto_df$cluster <- factor(cyto_df$cluster, levels = rev(levels(cyto_df$cluster)))
 cyto_df$gene <- factor(cyto_df$gene, levels = rev(levels(cyto_df$gene)))
+cyto_df <- cyto_df %>% complete(gene, nesting(cluster), fill = list(avg_logFC = 0))
 
 png("cyto_signaling_matrixplot.png", height= 350, width=1600)
-ggplot(cyto_df, aes(x=cluster, y=gene))+
-  geom_tile(aes(fill = avg_logFC), width=1) +
+ggplot(d, aes(x=cluster, y=gene))+
+  geom_tile(aes(fill = avg_logFC), width=1, color='gray50') +
   labs(fill = "logFC", x ="", y="", title = "Cytokine Signaling in Immune system") +
-  scale_fill_gradientn(colours = my_pal) +
+  scale_fill_gradientn(colours = my_pal2, breaks = 1:4, limits = c(0,4.1)) +
   guides( barheight = 10000) +
-  #theme_linedraw() +
-  theme(axis.text.x = element_text(angle = 90, hjust=1, size = 14, color = 'black'),
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 90, hjust=1, vjust= 0.5, size = 13, color = 'black'),
         axis.text.y = element_text(size = 16, colour = 'black'),
         plot.title = element_text(size = 20, hjust = 0.5, color = 'black' ),
-        panel.border = element_blank(),
-        panel.grid.major = element_blank(),
         legend.text=element_text(size=12, color='black'),
         legend.title = element_text(size = 12, color='black'),
         legend.key.height = unit(2,"line"),
-        #panel.grid.minor = element_blank(),
-        panel.background = element_rect(fill = "black",
-                                        colour = "black")) +
+        panel.grid.minor = element_blank()) +
   coord_flip()
 dev.off()
-
 
